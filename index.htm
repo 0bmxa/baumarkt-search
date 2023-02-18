@@ -1,0 +1,35 @@
+<html>
+<body>
+<form action="" target="_blank">
+    <input type="text" id="searchText" />
+    <button id="searchButton">Search</button>
+</form>
+<script>
+const urls = [
+    'https://www.globus-baumarkt.de/search?sSearch=%s',
+    'https://www.hellweg.de/search?search=%s',
+    'https://www.bauhaus.info/suche/produkte?text=%s',
+    'https://www.baywa-baumarkt.de/search?search=%s',
+    'https://www.hornbach.de/shop/suche/sortiment/%s',
+    'https://www.hagebau.de/search/?q=%s&ms=true',
+    'https://toom.de/s/%s',
+    'https://www.obi.de/search/%s/',
+];
+
+Object.defineProperty(String.prototype, 'uriEncoded', {
+    get: function() { return encodeURIComponent(this); }
+});
+
+function onSubmit(event) {
+    event.preventDefault();
+    const searchText = document.getElementById('searchText').value.uriEncoded;
+    //const searchText = encodeURIComponent(searchText);
+    urls.forEach(url => {
+        const searchURL = url.replace('%s', searchText);
+        window.open(searchURL, '_blank');
+    })
+}
+document.getElementById('searchButton').onclick = onSubmit;
+</script>
+</body>
+</html>
