@@ -1,35 +1,46 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="./bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="./style.css" /> -->
+</head>
+
+
 <body>
-<form action="" target="_blank">
-    <input type="text" id="searchText" />
-    <button id="searchButton">Search</button>
-</form>
-<script>
-const urls = [
-    'https://www.globus-baumarkt.de/search?sSearch=%s',
-    'https://www.hellweg.de/search?search=%s',
-    'https://www.bauhaus.info/suche/produkte?text=%s',
-    'https://www.baywa-baumarkt.de/search?search=%s',
-    'https://www.hornbach.de/shop/suche/sortiment/%s',
-    'https://www.hagebau.de/search/?q=%s&ms=true',
-    'https://toom.de/s/%s',
-    'https://www.obi.de/search/%s/',
-];
+    <div class="container" style="max-width: 800px;">
+        
+        <div class="mb-5">
+            <h1>Baumarkt Search</h1>
+        </div>
 
-Object.defineProperty(String.prototype, 'uriEncoded', {
-    get: function() { return encodeURIComponent(this); }
-});
+        <form id="searchForm" action="javascript:void(0);" class="card">
+            <div class="card-body">
+                <h5 class="card-title">Search</h5>
+                <div class="row">
+                    <div class="col-10">
+                        <input type="search" id="searchText" class="form-control" placeholder="Wandfarbe, Hammer, …" />
+                    </div>
+                    <div class="col-2">
+                        <input type="submit" class="btn btn-primary w-100" value="Search" />
+                    </div>
+                </div>
 
-function onSubmit(event) {
-    event.preventDefault();
-    const searchText = document.getElementById('searchText').value.uriEncoded;
-    //const searchText = encodeURIComponent(searchText);
-    urls.forEach(url => {
-        const searchURL = url.replace('%s', searchText);
-        window.open(searchURL, '_blank');
-    })
-}
-document.getElementById('searchButton').onclick = onSubmit;
-</script>
+                <p class="card-text">
+                    <!-- TODO: Instructions or so -->
+                </p>
+
+                <label for="storeSelection">Open popups for:</label>
+                <div id="storeSelection">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </form>            
+    </div>
+
+    <script src="./app.js"></script>
 </body>
+
 </html>
